@@ -1,0 +1,140 @@
+#include <vcl.h>
+#include "Pointer.h"
+
+bool run = 0;
+int field_height, field_width, counter = 0;
+float rozmiar;
+const float Pi = 3.14159;
+
+// ---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma resource "*.dfm"
+TForm1 *Form1;
+
+// ---------------------------------------------------------------------------
+__fastcall TForm1::TForm1(TComponent* Owner) : TForm(Owner) {
+	DoubleBuffered = true;
+	bitmap1 = new Graphics::TBitmap;
+	bitmap1->Width = Image1->Width;
+	bitmap1->Height = Image1->Height;
+
+	rect1.left = 0;
+	rect1.top = 0;
+	rect1.right = Image1->Width;
+	rect1.bottom = Image1->Height;
+
+	Draw_Shield();
+}
+// ---------------------------------------------------------------------------
+
+class wskaznik {
+public:
+	int angle;
+	int value;
+	int target;
+	int maxValue;
+	bool run;
+	TColor color;
+
+	wskaznik() {
+		angle = -100;
+		value = 0;
+		target = 0;
+		maxValue = 100;
+		run = false;
+		color = RGB(200, 200, 200);
+	}
+
+	void setColor(TColor c1) {
+		color = c1;
+	}
+};
+
+// ---------------------------------------------------------------------------
+void __fastcall TForm1::pSTARTClick(TObject *Sender) {
+	run = 1;
+	pSTART->Enabled = false;
+	pSTOP->Enabled = true;
+
+}
+
+void __fastcall TForm1::zegarTimer(TObject *Sender) {
+
+	float angle, angle1;
+
+	if (run == 1) {
+		rozmiar = StrToInt(EditRozmiar->Text); // *
+
+		if (EditRozmiar->Text < 0) { // jesli brak znaku w EditRozmiar
+			EditRozmiar->Text = 0;
+		}
+
+		TrackBar1->Position = rozmiar;
+		angle = (27.000 / 25 * (rozmiar / 10)) + (26.500 / 25); // line function
+		angle1 = angle + 161; // angle, from 161		y=ax+b
+
+		// rysuj(double k¹t, int promien_okregu);
+		Draw_Pointer(angle1, 150);
+
+	}
+}
+// ---------------------------------------------------------------------------
+
+void TForm1::Draw_Shield() {
+
+}
+
+// ---------------------------------------------------------------------------
+
+void __fastcall TForm1::pSTOPClick(TObject *Sender) {
+	run = 0;
+	pSTOP->Enabled = false;
+	pSTART->Enabled = true;
+}
+// ---------------------------------------------------------------------------
+
+void __fastcall TForm1::TrackBar1Change(TObject *Sender) {
+	rozmiar = TrackBar1->Position;
+	EditRozmiar->Text = rozmiar;
+}
+// ---------------------------------------------------------------------------
+
+void __fastcall TForm1::Timer1Timer(TObject *Sender) {
+	counter++;
+	if (counter == 1) {
+		Field->Canvas->Brush->Style = bsClear; // drawing pointer
+		Field->Canvas->Pen->Color = clRed;
+		Field->Canvas->MoveTo(150, 150);
+		Image1->Canvas->CopyRect(ProstField, Field->Canvas, ProstField);
+		Field->Canvas->LineTo(9, 195);
+		Timer1->Enabled = false;
+	}
+
+}
+// ---------------------------------------------------------------------------
+
+// rysuj(double k¹t, int promien_okregu);
+void TForm1::Draw_Pointer(float offset_angle, int promien) {
+	static float oldangle = 0;
+	for (oldangle; oldangle < offset_angle + 1; oldangle++) {
+		for (int a = 0; a <= 505; a++) {
+			if (a >= 505) {
+
+				float fi = oldangle * Pi / 180; // przeliczenie stopni na radian
+				int x = promien * cos(fi), y = promien * sin(fi);
+				Field->Canvas->Brush->Style = bsClear;
+				Field->Canvas->Pen->Color = clRed;
+				Field->Canvas->MoveTo(150, 150);
+				Field->Canvas->LineTo(x + 150, y + 150);
+
+			}
+		}
+	}
+	oldangle = offset_angle;
+}
+
+// ---------------------------------------------------------------------------
+void __fastcall TForm1::FormClose(TObject *Sender, TCloseAction &Action) {
+	delete Field;
+}
+// ---------------------------------------------------------------------------

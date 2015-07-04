@@ -1,0 +1,47 @@
+// ---------------------------------------------------------------------------
+
+#ifndef PointerH
+#define PointerH
+// ---------------------------------------------------------------------------
+#include <System.Classes.hpp>
+#include <Vcl.Controls.hpp>
+#include <Vcl.StdCtrls.hpp>
+#include <Vcl.Forms.hpp>
+#include <Vcl.ComCtrls.hpp>
+#include <Vcl.ExtCtrls.hpp>
+#include <Vcl.Imaging.jpeg.hpp>
+
+// ---------------------------------------------------------------------------
+class TForm1 : public TForm {
+__published: // IDE-managed Components
+	TGroupBox *GroupBox2;
+	TImage *tarcza;
+	TLabel *LabelAutor;
+	TLabel *LabelJednostka;
+	TTrackBar *TrackBar1;
+	TButton *pSTART;
+	TButton *pSTOP;
+	TEdit *EditRozmiar;
+	TTimer *zegar;
+	TTimer *Timer1;
+	TImage *Image2;
+	TImage *Image1;
+	void __fastcall pSTARTClick(TObject *Sender);
+	void __fastcall pSTOPClick(TObject *Sender);
+	void __fastcall zegarTimer(TObject *Sender);
+	void __fastcall Timer1Timer(TObject *Sender);
+	void __fastcall TrackBar1Change(TObject *Sender);
+	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
+private: // User declarations
+	Graphics::TBitmap * Field;
+	TRect ProstField;
+public: // User declarations
+	__fastcall TForm1(TComponent* Owner);
+	void Draw_Pointer(float, int);
+	void Draw_Shield(float, int);
+};
+
+// ---------------------------------------------------------------------------
+extern PACKAGE TForm1 *Form1;
+// ---------------------------------------------------------------------------
+#endif

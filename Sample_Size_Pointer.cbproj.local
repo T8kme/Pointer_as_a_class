@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899-12-30 00:00:00.000.058,=C:\Users\Rafael\Documents\RAD Studio\Projects\Project2PCH1.h</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.255,D:\ProjektyCpp\Project_Pointer_as_Class\Sample_Size_Pointer.cbproj=C:\Users\Rafael\Documents\RAD Studio\Projects\Project2.cbproj</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.638,D:\ProjektyCpp\Project_Pointer_as_Class\Pointer.h=C:\Users\Rafael\Documents\RAD Studio\Projects\Unit2.h</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.007,D:\ProjektyCpp\Project_Pointer_as_Class\PointerH.h=C:\Users\Rafael\Documents\RAD Studio\Projects\Project2PCH1.h</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.638,D:\ProjektyCpp\Project_Pointer_as_Class\Pointer.cpp=C:\Users\Rafael\Documents\RAD Studio\Projects\Unit2.cpp</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.096,=C:\Users\Rafael\Documents\RAD Studio\Projects\Unit2.cpp</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.638,D:\ProjektyCpp\Project_Pointer_as_Class\Pointer.dfm=C:\Users\Rafael\Documents\RAD Studio\Projects\Unit2.dfm</Transaction>
+  </Transactions>
+</BorlandProject>
