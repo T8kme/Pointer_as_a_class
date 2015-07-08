@@ -55,7 +55,19 @@ public:
 	}
 };
 
+class TDiode {
+public:
+	bool enabled;
+	TColor color;
+
+	TDiode() {
+		enabled = false;
+		color = clGray;
+	}
+};
+
 TSamplePointer pointer1; // create object called pointer1
+TDiode diode1;
 
 // ---------------------------------------------------------------------------
 
@@ -70,7 +82,7 @@ void TForm1::Draw_Shield() {
 	bitmap1->Canvas->Brush->Color = clBlack;
 	bitmap1->Canvas->Pen->Color = clBlack;
 	bitmap1->Canvas->Pen->Width = 0;
-	bitmap1->Canvas->Ellipse(5, 5, 10, 10); // screw elements
+	bitmap1->Canvas->Ellipse(5, 5, 10, 10); // sruby xD
 	bitmap1->Canvas->Ellipse(size - 5, size - 5, size - 10, size - 10);
 	bitmap1->Canvas->Ellipse(size - 5, 5, size - 10, 10);
 	bitmap1->Canvas->Ellipse(5, size - 5, 10, size - 10);
@@ -85,6 +97,16 @@ void TForm1::Draw_Shield() {
 		bitmap1->Canvas->Brush->Color = color1;
 		bitmap1->Canvas->Ellipse(i, i, size - i, size - i);
 	}
+
+        	//+++++++++diode+++++++++++
+
+	for (int i = 0; i < 20; i++) { // center point
+		TColor color1 = RGB(i*2, i*2, i*2);
+		bitmap1->Canvas->Pen->Color = color1;
+		bitmap1->Canvas->Brush->Color = color1;
+		bitmap1->Canvas->Ellipse(i + size/2, i + size - size/4, -i+size/2, -i + size - size/4);
+	}
+
 
 	bitmap1->Canvas->Brush->Color = RGB(104, 104, 104);
 
@@ -249,3 +271,37 @@ void __fastcall TForm1::FormClose(TObject *Sender, TCloseAction &Action) {
 	delete bitmap1;
 }
 // ---------------------------------------------------------------------------
+void __fastcall TForm1::TrackBar1Change(TObject *Sender)
+{
+	switch (TrackBar1->Position) {
+	case 0:
+		pointer1.Set_Color(RGB(200, 200, 200), RGB(130, 130, 130)); // gray
+		break;
+	case 1:
+		pointer1.Set_Color(RGB(255, 0, 0), RGB(180, 0, 0)); // red
+		break;
+	case 2:
+		pointer1.Set_Color(RGB(0, 255, 0), RGB(0, 180, 0));  // green
+		break;
+	case 3:
+		pointer1.Set_Color(RGB(0, 0, 255), RGB(0, 0, 180));   // blue
+		break;
+	case 4:
+		pointer1.Set_Color(RGB(255, 255, 0), RGB(180, 180, 0)); // yellow
+		break;
+	case 5:
+		pointer1.Set_Color(RGB(255, 0, 255), RGB(189, 0, 151));  // pink
+		break;
+	}
+	Draw_Shield();
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TForm1::ScrollBar1Change(TObject *Sender)
+{
+	pointer1.shield = ScrollBar1->Position;
+	Draw_Shield();
+}
+//---------------------------------------------------------------------------
+

@@ -23,10 +23,16 @@ __published: // IDE-managed Components
 	TTimer *Timer1;
 	TImage *Image1;
 	TButton *SetButton;
+	TLabel *LabelColor;
+	TScrollBar *ScrollBar1;
+	TTrackBar *TrackBar1;
+	TLabel *Label1;
 	TLabel *Label2;
 	void __fastcall Timer1Timer(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall SetButtonClick(TObject *Sender);
+	void __fastcall TrackBar1Change(TObject *Sender);
+	void __fastcall ScrollBar1Change(TObject *Sender);
 private: // User declarations
 	Graphics::TBitmap * bitmap1;
 	TRect rect1;
